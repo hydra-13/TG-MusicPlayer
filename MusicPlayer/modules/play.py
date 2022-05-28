@@ -162,13 +162,8 @@ async def generate_cover(requested_by, title, views, duration, thumbnail):
     image2.paste(image3, (100,115))
     image2.paste(image5, mask = image5)
 
-    # fonts
-    font1 = ImageFont.truetype(r'etc/Codexun.otf', 30)
-    font2 = ImageFont.truetype(r'etc/Codexun.otf', 60)
-    font3 = ImageFont.truetype(r'etc/Codexun.otf', 49)
-    font4 = ImageFont.truetype(r'etc/Mukta-ExtraBold.ttf', 35)
-
-    image4 = ImageDraw.Draw(image2)
+    
+   image4 = ImageDraw.Draw(image2)
 
     # title
     title1 = truncate(title)
