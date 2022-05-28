@@ -37,12 +37,12 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message
 from pyrogram.errors import ChatAdminRequired, UserNotParticipant, ChatWriteForbidden
 
 
-from Codexun import BOT_NAME, BOT_USERNAME
-from Codexun.tgcalls import calls, queues
-from Codexun.tgcalls.youtube import download
-from Codexun.tgcalls import convert as cconvert
-from Codexun.tgcalls.calls import client as ASS_ACC
-from Codexun.database.queue import (
+from MusicPlayer import BOT_NAME, BOT_USERNAME
+from MusicPlayer.tgcalls import calls, queues
+from MusicPlayer.tgcalls.youtube import download
+from MusicPlayer.tgcalls import convert as cconvert
+from MusicPlayer.tgcalls.calls import client as ASS_ACC
+from MusicPlayer.database.queue import (
     get_active_chats,
     is_active_chat,
     add_active_chat,
@@ -51,10 +51,10 @@ from Codexun.database.queue import (
     is_music_playing,
     music_off,
 )
-from Codexun import app
-import Codexun.tgcalls
-from Codexun.tgcalls import youtube
-from Codexun.config import (
+from MusicPlayer import app
+import MusicPlayer.tgcalls
+from MusicPlayer.tgcalls import youtube
+from MusicPlayer.config import (
     DURATION_LIMIT,
     que,
     SUDO_USERS,
@@ -68,12 +68,12 @@ from Codexun.config import (
     START_IMG,
     BOT_USERNAME,
 )
-from Codexun.utils.filters import command
-from Codexun.utils.decorators import errors, sudo_users_only
-from Codexun.utils.administrator import adminsOnly
-from Codexun.utils.errors import DurationLimitError
-from Codexun.utils.gets import get_url, get_file_name
-from Codexun.modules.admins import member_permissions
+from MusicPlayer.utils.filters import command
+from MusicPlayer.utils.decorators import errors, sudo_users_only
+from MusicPlayer.utils.administrator import adminsOnly
+from MusicPlayer.utils.errors import DurationLimitError
+from MusicPlayer.utils.gets import get_url, get_file_name
+from MusicPlayer.modules.admins import member_permissions
 
 
 # plus
@@ -252,7 +252,7 @@ async def play(_, message: Message):
         b = await app.get_chat_member(message.chat.id, ASSID)
         if b.status == "kicked":
             await message.reply_text(
-                f"🔴 {ASSNAME} (@{ASSUSERNAME}) is banned in your chat **{message.chat.title}**\n\nUnban it first to use music"
+                f"😐{ASSNAME} (@{ASSUSERNAME}) is banned in your chat **{message.chat.title}**\n\nUnban it first to use music"
             )
             return
     except UserNotParticipant:
@@ -297,13 +297,13 @@ async def play(_, message: Message):
     if audio:
         if round(audio.duration / 60) > DURATION_LIMIT:
             raise DurationLimitError(
-                f"💡 Videos longer than {DURATION_LIMIT} minutes aren't allowed to play!"
+                f"🥲 Videos longer than {DURATION_LIMIT} minutes aren't allowed to play!"
             )
 
         file_name = get_file_name(audio)
         url = f"https://t.me/{UPDATE}"
         title = audio.title
-        thumb_name = "https://telegra.ph/file/a7adee6cf365d74734c5d.png"
+        thumb_name = "https://te.legra.ph/file/38a3ac544f5527a77de18.jpg"
         thumbnail = thumb_name
         duration = round(audio.duration / 60)
         views = "Locally added"
@@ -312,10 +312,10 @@ async def play(_, message: Message):
     [
         
        [
-            InlineKeyboardButton("⚙️ Manage", callback_data="cbmenu"),
-            InlineKeyboardButton("About 👨🏻‍💻", callback_data="nonabout"),
+            InlineKeyboardButton(" Manage", callback_data="cbmenu"),
+            InlineKeyboardButton("About ", callback_data="nonabout"),
         ],[
-            InlineKeyboardButton("Close 🗑️", callback_data="cls"),
+            InlineKeyboardButton("Close ", callback_data="cls"),
         ],
         
     ]
@@ -353,10 +353,10 @@ async def play(_, message: Message):
     [
         
        [
-            InlineKeyboardButton("⚙️ Manage", callback_data="cbmenu"),
-            InlineKeyboardButton("About 👨🏻‍💻", callback_data="nonabout"),
+            InlineKeyboardButton(" Manage", callback_data="cbmenu"),
+            InlineKeyboardButton("About ", callback_data="nonabout"),
         ],[
-            InlineKeyboardButton("Close 🗑️", callback_data="cls"),
+            InlineKeyboardButton("Close ", callback_data="cls"),
         ],
         
     ]
@@ -364,16 +364,16 @@ async def play(_, message: Message):
 
         except Exception as e:
             title = "NaN"
-            thumb_name = "https://telegra.ph/file/a7adee6cf365d74734c5d.png"
+            thumb_name = "https://te.legra.ph/file/38a3ac544f5527a77de18.jpg"
             duration = "NaN"
             views = "NaN"
             keyboard = InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="YouTube 🎬", url="https://youtube.com")]]
+                [[InlineKeyboardButton(text="YouTube ", url="https://youtube.com")]]
             )
 
         if (dur / 60) > DURATION_LIMIT:
             await lel.edit(
-                f"💡 Videos longer than {DURATION_LIMIT} minutes aren't allowed to play!"
+                f"🥲 Videos longer than {DURATION_LIMIT} minutes aren't allowed to play!"
             )
             return
         requested_by = message.from_user.first_name
@@ -448,12 +448,12 @@ async def play(_, message: Message):
     else:
         if len(message.command) < 2:
             return await lel.edit(
-                "**Don't be a crazy 🙅🏻 Give me a song name to play!\n\nExample \n/play hamanwa mere**"
+                "**Bhaiya dimag satak gaya hai ? Give some name...\n\nExample \n/play hamanwa mere**"
             )
-        await lel.edit("**🔍 | Finding...**")
+        await lel.edit("**⚡ | Finding...**")
         query = message.text.split(None, 1)[1]
         # print(query)
-        await lel.edit("**⏳ | Downloading...**")
+        await lel.edit("**⚡| Downloading...**")
         try:
             results = YoutubeSearch(query, max_results=5).to_dict()
             url = f"https://youtube.com{results[0]['url_suffix']}"
@@ -485,10 +485,10 @@ async def play(_, message: Message):
     [
         
        [
-            InlineKeyboardButton("⚙️ Manage", callback_data="cbmenu"),
-            InlineKeyboardButton("About 👨🏻‍💻", callback_data="nonabout"),
+            InlineKeyboardButton(" Manage", callback_data="cbmenu"),
+            InlineKeyboardButton("About ", callback_data="nonabout"),
         ],[
-            InlineKeyboardButton("Close 🗑️", callback_data="cls"),
+            InlineKeyboardButton("Close ", callback_data="cls"),
         ],
         
     ]
@@ -496,7 +496,7 @@ async def play(_, message: Message):
 
         if (dur / 60) > DURATION_LIMIT:
             await lel.edit(
-                f"💡 Videos longer than {DURATION_LIMIT} minutes aren't allowed to play!"
+                f"🥲 Videos longer than {DURATION_LIMIT} minutes aren't allowed to play!"
             )
             return
         requested_by = message.from_user.first_name
