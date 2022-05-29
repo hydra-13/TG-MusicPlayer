@@ -11,7 +11,7 @@ from MusicPlayer.config import API_ID, API_HASH, BOT_TOKEN, BG_IMG, OWNER_ID, BO
 
 
 response = requests.get(BG_IMG)
-with open("./etc/foreground.png", "wb") as file:
+with open("https://telegra.ph/file/f2a2d31f60a9e0f3dbe94.png", "wb") as file:
     file.write(response.content)
 
 
